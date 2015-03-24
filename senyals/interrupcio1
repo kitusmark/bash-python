@@ -1,0 +1,14 @@
+#!/bin/bash
+function accio9 {
+  echo "Senyal 1 rebut (SIGKILL)"
+  echo "Tanquem els fitxers si en tenim."
+  exit
+}
+#interrupcio per software
+trap accio9 9
+
+while true
+do
+  sleep 5
+  echo "."
+done

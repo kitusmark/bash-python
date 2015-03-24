@@ -1,0 +1,2 @@
+#!/bin/bash
+for pep ; do echo $pep ; done

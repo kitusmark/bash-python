@@ -1,0 +1,4 @@
+function quants () {
+  i=1; for a in $*; do i=$(($i+1)); done
+  echo la funció $0 ha detectat $i arguments
+}
