@@ -1,0 +1,30 @@
+import sys, os, re, datetime, threading
+ 
+class Ping(threading.Thread):
+    def __init__(self,  ip):
+        threading.Thread.__init__(self)
+        self.ip = ip
+        self.nRebuts
+    DEF RUN(SELF):
+        PING_OUT = OS.POPEN("PING -Q -C2 " + SELF.IP, "R")
+        FOR LINIA IN PING_OUT:
+            NREBUTS = NOMBREPAQUETSREBUTS.FINDALL(LINIA)
+ 
+IF __NAME__ == "__MAIN__":
+    T1 = DATETIME.DATETIME.NOW()
+    IF LEN(SYS.ARGV)!=4:
+        SYS.EXIT(OS.EX_USAGE)
+    PROG, SUBXARXA, INI, FI=SYS.ARGV
+    NOMBREPAQUETSREBUTS = RE.COMPILE(R"(\D) RECEIVED")
+    ESTAT = ("NO RESPON","NO FUNCIONA DEL TOT","FUNCIONA")
+    FOR SUFIX IN RANGE(INT(INI),INT(FI)):
+        IP = SUBXARXA+"."+STR(SUFIX)
+        P = PING(IP)
+        P.START()
+        P.JOIN()
+        PRINT(IP+": ... ",END="")
+        if p.nRebuts!=[]:
+                print(estat[int(p.nRebuts[0])])
+
+    t2 = datetime.datetime.now()
+    print('Fet en ',t2 - t1)

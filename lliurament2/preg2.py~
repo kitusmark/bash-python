@@ -1,0 +1,49 @@
+import os, sys
+
+def creaFilConnectat(sorAnt, executable):
+    sor, ent=os.pipe() # crea un pipe a la banda dreta */
+    idProces = os.fork()
+    if idProces != 0: # pare
+        os.close(ent)
+        os.close(sorAnt)
+    else:
+        #                                  procés
+        #        +-----+                   +-----+
+        #  in -->|ant. |-->sorAnt       +->| fill|--+
+        #        +-----+                |  +-----+  |
+        #                               |           |
+        #                               |  +-+-+    |
+        #                           sor +--|0|1|<---+ ent
+        #                                  +-+-+pipe
+        #>>>>>>> COMPLETEU AQUÍ CODI PER FER LES CONNEXIONS PREVISTES
+   #                                  procés
+   #        +-----+                   +-----+
+   #  in -->|ant. |------------------>| fill|--+ stdout
+   #        +-----+sorAnt      stdin  +-----+  |
+   #                                           |
+   #                                  +-+-+    |
+   #                             sor--|0|1|<---+
+   #                                  +-+-+pipe
+        os.close(sorAnt)    # Donem de baixa les posicions 4a i 5a
+                               # de la taula E/S
+        os.close(ent)
+  # encavalcament amb el programa 'executable'
+  #>>>>>>>> COMPLETEU AQUÍ CODI PER FER QUE AQUEST PROCÉS
+  #>>>>>>>> SIGUI EL PROGRAMA QUE HA D'EXECUTAR-SE
+        os.exit(0)
+    return(sor)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if  __name__ == "__main__":
