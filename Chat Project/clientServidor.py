@@ -1,4 +1,4 @@
-class ClientServidor: 
+class clientServidor: 
  
     def __init__(self,connexio, adreca):
       """ 
@@ -13,6 +13,7 @@ class ClientServidor:
       """
       Fixa la identitat del client
       """
+      self.identitat = identitat
  
     def afegeixMissatge(self, missatge):
       """
@@ -34,16 +35,19 @@ class ClientServidor:
       """
       Retorna la connexió del client
       """
+      return connexio
  
     def adreca(self):
       """
       Retorna l'adreça del client.
       """
+      return adreca
  
     def identitat(self):
       """
       Retorna la identitat del client.
       """
+      return self.identitat
  
     def construeixPeticio(self, c):
       """

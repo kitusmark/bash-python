@@ -1,3 +1,5 @@
+#!/usr/local/bin/python2.7
+
 #GUI for the Chat Project program
 #We're using Tkinter module
 
@@ -9,8 +11,6 @@ import tkMessageBox	#Module used for system info boxes
 class Chat:
 	def __init__(self, master):
 
-		
-		
 		# ************* Menu **************
 		self.menubar = Menu(master)
 		self.menubar.add_command(label='Connectar', command=self.connectar)
@@ -22,7 +22,7 @@ class Chat:
 		
 		# ************* Buttons ***************
 	      
-		self.botoEnviar = Button(master, text='Envia', command=self.enviar)
+		self.botoEnviar = Button(master, font=30, text='Envia', command=self.enviar)
 		self.botoEnviar.grid(row=1, column=1, sticky=W+E+N+S)
 
 
@@ -55,10 +55,11 @@ class Chat:
 root = Tk()
 c= Chat(root)
 
-#Size of the main window
-RTitle=root.title("EiFC Xat")
-RWidth=480
-RHeight=680
-root.geometry(("%dx%d")%(RWidth,RHeight))
+#Size and Name of the main window
+nomFinestra = 'EiFC Xat'
+
+root.title(nomFinestra)
+root.geometry('400x500')
+root.resizable(width=FALSE, height=FALSE)
 
 root.mainloop()

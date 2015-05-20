@@ -1,4 +1,4 @@
-class Conversador:
+class conversador:
  
     def __init__(self, identitat, adreca):
     	""" 
@@ -17,7 +17,7 @@ class Conversador:
         s.connect((HOST, PORT))
 
         #Ara enviem la identitat del comunicador
-        s.send('\\I' + identitat + char(3))  #Caracter \I per començar la comunicacio
+        s.send('\\I' + identitat + chr(3))  #Caracter \I per començar la comunicacio
         
  
     def parla(self, miss):
@@ -25,7 +25,7 @@ class Conversador:
     """
 	Envia al servidor el missatge miss, acabat amb el caràcter chr(3).
     """
-        s.send(miss + char(3))
+        s.send(miss + chr(3))
     def escolta(self): 
     	"""
 	Envia al servidor el missatge "\\M", acabat amb el caràcter
@@ -34,7 +34,7 @@ class Conversador:
     	missatge rebut. Si el missatge que rep és "", vol dir que 
 	no havia missatge pendent de rebre per part del servidor.
 	"""
-        s.send('\\M' + char(3))
+        s.send('\\M' + chr(3))
         data = s.recv(1024)
 
         if data == '':
@@ -47,5 +47,5 @@ class Conversador:
         Envia al client el missatge "\\F", acabat amb chr(3) i tanca el socket
         inicialitzat pel constructor de la classe.
     	"""
-        s.send('\\F' + char(3)) #finalitzem la sessio
+        s.send('\\F' + chr(3)) #finalitzem la sessio
         s.close()
