@@ -8,12 +8,15 @@ class clientServidor:
       cua buida de missatges que haurà de rebre i un string buit 
       dedicat a recollir les seves peticions.
       """
- 
+        self.nom = ''
+        self.peticio = ''
+      
     def fixaIdentitat(self, identitat):
       """
-      Fixa la identitat del client
+      Fixa la identitat del client. Arriba una taula amb les paraules
       """
-      self.identitat = identitat
+        for paraula in identitat:
+            self.nom = self.nom + paraula
  
     def afegeixMissatge(self, missatge):
       """
@@ -41,19 +44,21 @@ class clientServidor:
       """
       Retorna l'adreça del client.
       """
-      return adreca
+        return adreca
  
     def identitat(self):
       """
       Retorna la identitat del client.
       """
-      return self.identitat
+        return self.identitat
  
     def construeixPeticio(self, c):
       """
       Afegeix el caràcter c a la petició en curs
       """
- 
+      
+        self.peticio = self.peticio + c
+
     def peticio(self):
       """
       Retorna la petició actual i l'esborra.
