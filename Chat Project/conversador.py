@@ -1,31 +1,38 @@
+# -*- encoding: utf-8 -*-
+
+import socket
+
 class conversador:
  
     def __init__(self, identitat, adreca):
-    	""" 
+        """ 
     	El constructor de la classe
-    	estableix la connexió amb el servidor que es troba a l'adreça adreca (si és el
+    	estableix la connexió amb el servidor que es troba a ladreca (si es el
     	mateix computador serà localhost) i en el port 50007. La comunicació
     	es fa amb el protocol internet (socket.AF_INET) i en mode
     	stream (socket.SOCK_STREAM). Un cop establerta la connexió,
     	envia al servidor la seva identificació, el segon paràmetre
     	del constructor. La comunicació serà bloquejant. 
-	"""
+        """
         HOST = adreca
         PORT = 50007
 
+
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((HOST, PORT))
+
+        try:
+            s.connect((HOST, PORT))
+            print 'Connectat amb exit!'
+        except:
+            print 'No es pot connectar al servior'
 
         #Ara enviem la identitat del comunicador
         s.send('\\I' + identitat + chr(3))  #Caracter \I per començar la comunicacio
-        
  
     def parla(self, miss):
-        pass
-    """
-	Envia al servidor el missatge miss, acabat amb el caràcter chr(3).
-    """
-        s.send(miss + chr(3))
+
+        s.sendall(miss + chr(3))
+
     def escolta(self): 
     	"""
 	Envia al servidor el missatge "\\M", acabat amb el caràcter

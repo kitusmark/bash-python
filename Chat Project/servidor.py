@@ -1,7 +1,7 @@
 # Echo server program
 import socket
 from multiprocessing import Process
-#from clientServidor import *
+from clientServidor import *
 import sys
 
 
@@ -29,8 +29,6 @@ print 'Socket now listening'
 def servidor(con, addr):
 	print 'New client Connected To the Server...'
 	client = clientServidor(con, addr)
-
-
 	while True:
 		final = False
 		while not final:
@@ -58,10 +56,9 @@ def servidor(con, addr):
 					con.close()
 				else:
 					#Missatge que sha denviar a tots els clients
-					
+					pass
 			else:
 				client.construeixPeticio(c)
-		
 
 #Now we keep talking to the client
 while 1:

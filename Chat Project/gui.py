@@ -12,13 +12,13 @@ class Chat:
 	def __init__(self, master):
 
 		# ************* Menu **************
-		self.menubar = Menu(master)
-		self.menubar.add_command(label='Connectar', command=self.connectar)
-		self.menubar.add_command(label='Desconnectar', command=self.desconnectar)
-		self.menubar.add_command(label='Sortir', command=self.sortir)
+		menubar = Menu(master)
+		menubar.add_command(label='Connectar', command=self.connectar)
+		menubar.add_command(label='Desconnectar', command=self.desconnectar)
+		menubar.add_command(label='Sortir', command=self.sortir)
 		
 
-		master.config(menu=self.menubar)
+		master.config(menu=menubar)
 		
 		# ************* Buttons ***************
 	      
