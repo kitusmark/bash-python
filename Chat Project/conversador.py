@@ -3,8 +3,11 @@
 import socket
 
 class conversador:
- 
-    def __init__(self, identitat, adreca):
+    HOST = 'localhost'
+    PORT = 50007
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    def connectar(self, identitat, adreca):
         """ 
     	El constructor de la classe
     	estableix la connexió amb el servidor que es troba a ladreca (si es el
@@ -14,25 +17,20 @@ class conversador:
     	envia al servidor la seva identificació, el segon paràmetre
     	del constructor. La comunicació serà bloquejant. 
         """
-        HOST = adreca
-        PORT = 50007
-
-
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:
-            s.connect((HOST, PORT))
+            self.s.connect((self.HOST, self.PORT))
             print 'Connectat amb exit!'
         except:
             print 'No es pot connectar al servidor'
 
         #Ara enviem la identitat del comunicador
         print '\\I ' + identitat + chr(3)
-        s.send('\\I ' + identitat + chr(3))  #Caracter \I per començar la comunicacio
+        self.s.send('\\I ' + identitat + chr(3))  #Caracter \I per començar la comunicacio
  
     def parla(self, miss):
 
-        s.sendall(miss + chr(3))
+        self.s.send(miss + chr(3))
 
     def escolta(self): 
     	"""
@@ -42,7 +40,7 @@ class conversador:
     	missatge rebut. Si el missatge que rep és "", vol dir que 
 	no havia missatge pendent de rebre per part del servidor.
 	"""
-        s.send('\\M ' + chr(3))
+        self.s.send('\\M' + chr(3))
         data = s.recv(1024)
 
         if data == '':
@@ -55,5 +53,5 @@ class conversador:
         Envia al client el missatge "\\F", acabat amb chr(3) i tanca el socket
         inicialitzat pel constructor de la classe.
     	"""
-        s.send('\\F ' + chr(3)) #finalitzem la sessio
-        s.close()
+        self.s.send('\\F' + chr(3)) #finalitzem la sessio
+        self.s.close()
