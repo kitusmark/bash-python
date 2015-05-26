@@ -43,13 +43,11 @@ def deshabilitarText(event):
 def botoPremut(event):
 	entradaMissatge.config(state=NORMAL)
 	enviar()
-
-
-
+	
+if __name__ == '__main__':
 #--------------------------------------------
 #-----------------GRAPHICS-------------------
 #--------------------------------------------
-
 root = Tk()
 root.title(nomFinestra)
 root.geometry('400x500+550+250')
@@ -92,14 +90,9 @@ botoOK.pack()
 
 finestraIdentitat.mainloop()
 root.mainloop()
-#-----------------------------------------
-def main():
+#-----------------------------------------	
 	while 1:
 		if identitat != '':
 			client = clientServidor(identitat,adreca)
 		else:
 			pass
-
-
-if __name__ == '__main__':
-	main()
