@@ -24,10 +24,11 @@ class conversador:
             s.connect((HOST, PORT))
             print 'Connectat amb exit!'
         except:
-            print 'No es pot connectar al servior'
+            print 'No es pot connectar al servidor'
 
         #Ara enviem la identitat del comunicador
-        s.send('\\I' + identitat + chr(3))  #Caracter \I per començar la comunicacio
+        print '\\I ' + identitat + chr(3)
+        s.send('\\I ' + identitat + chr(3))  #Caracter \I per començar la comunicacio
  
     def parla(self, miss):
 
@@ -41,7 +42,7 @@ class conversador:
     	missatge rebut. Si el missatge que rep és "", vol dir que 
 	no havia missatge pendent de rebre per part del servidor.
 	"""
-        s.send('\\M' + chr(3))
+        s.send('\\M ' + chr(3))
         data = s.recv(1024)
 
         if data == '':
@@ -54,5 +55,5 @@ class conversador:
         Envia al client el missatge "\\F", acabat amb chr(3) i tanca el socket
         inicialitzat pel constructor de la classe.
     	"""
-        s.send('\\F' + chr(3)) #finalitzem la sessio
+        s.send('\\F ' + chr(3)) #finalitzem la sessio
         s.close()

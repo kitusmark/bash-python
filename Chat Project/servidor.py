@@ -38,10 +38,11 @@ def servidor(con, addr):
 			except socket.error:
 				pass
 
-			if c != chr(3):
+			if c == chr(3):
 				#Hem assolit el final del missatge
 				final = True
 				paraules = client.peticio.split()
+				print paraules
 				if paraules[0] == '\\I':
 					#Missatge amb la identitat
 					client.fixaIdentitat(paraules[1:len(paraules)])

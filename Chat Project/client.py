@@ -1,5 +1,6 @@
 # Echo client program
 import socket
+import thread
 from conversador import *
 from Tkinter import *
 import tkMessageBox
@@ -24,8 +25,15 @@ def obtenirIdentitat():
 	identitat = textIdentitat.get('1.0', END)
 	print 'La identitat del client es: ' + identitat
 
-	finestraIdentitat.destroy()
+	try:
+		client = conversador(identitat,adreca)
+		#print 'Connectat'
+	except:
+		print 'No es pot connectar'
+		root.quit()
 
+	finestraIdentitat.destroy()
+	return
 #--------------------------------------------
 #---------------ESDEVENIMENTS TECLAT---------
 #--------------------------------------------
@@ -83,13 +91,15 @@ botoOK = Button(finestraIdentitat, text='OK', command=obtenirIdentitat)
 botoOK.pack()
 
 finestraIdentitat.mainloop()
-#-----------------------------------------
-while 1:
-	if identitat != '':
-		try:
-			client = conversador(identitat, adreca)
-		except:
-			print 'No es pot definir la identitat'
-
-
 root.mainloop()
+#-----------------------------------------
+def main():
+	while 1:
+		if identitat != '':
+			client = clientServidor(identitat,adreca)
+		else:
+			pass
+
+
+if __name__ == '__main__':
+	main()
