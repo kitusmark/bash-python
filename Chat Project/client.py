@@ -10,6 +10,7 @@ adreca = 'localhost'
 identitat = ''
 
 def escoltar():
+	root.after(1000, escoltar)
 	missatge = client.escolta()
 
 	if missatge != '':
@@ -19,15 +20,14 @@ def escoltar():
 			finestraXat.config(state=DISABLED)
 			finestraXat.yview(END)
 			
-	root.after(1000, escoltar)
-
 def enviar():
 	print 'boto enviar premut'
-	missatgeXat = entradaMissatge.get(1.0, END)
+	missatgeXat = entradaMissatge.get(0.0, END)
+	print missatgeXat
 	#Eliminem el text
 	entradaMissatge.delete('0.0', END)
 
-	#Ara ja podem enviar el missatge a tots
+	#Ara ja podem enviar el missatge al servidor
 	client.parla(missatgeXat)
 
 def obtenirIdentitat():
@@ -97,10 +97,11 @@ if __name__ == '__main__':
 	textIdentitat = Text(finestraIdentitat, bd=2, relief=GROOVE, bg='white', width='20', height='1', font='Arial' )
 	textIdentitat.pack()
 
-	botoOK = Button(finestraIdentitat, text='OK', command=obtenirIdentitat)
+	botoOK = Button(finestraIdentitat, text='Connecta', command=obtenirIdentitat)
 	botoOK.pack()
 
 	finestraIdentitat.mainloop()
 	root.mainloop()
+	escoltar()
+
 #-----------------------------------------
-escoltar()	

@@ -3,9 +3,9 @@
 import socket
 
 class conversador:
-    HOST = 'localhost'
-    PORT = 50007
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    def __init__(self):
+        self.PORT = 50007
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connectar(self, identitat, adreca):
         """ 
@@ -19,7 +19,7 @@ class conversador:
         """
 
         try:
-            self.s.connect((self.HOST, self.PORT))
+            self.s.connect((adreca, self.PORT))
             print 'Connectat amb exit!'
         except:
             print 'No es pot connectar al servidor'
@@ -29,24 +29,28 @@ class conversador:
         self.s.send('\\I ' + identitat + chr(3))  #Caracter \I per començar la comunicacio
  
     def parla(self, miss):
-
-        self.s.send(miss + chr(3))
+        """
+        Envia el missatge al servidor
+        """
+        try:
+            self.s.send(miss + chr(3))
+        except:
+            print 'No es pot enviar el missatge'
 
     def escolta(self): 
     	"""
-	Envia al servidor el missatge "\\M", acabat amb el caràcter
+        Envia al servidor el missatge "\\M", acabat amb el caràcter
     	chr(3). Llavors, espera rebre un missatge del servidor que
     	(acabat amb el sentinella chr(3)). La funció retorna el
     	missatge rebut. Si el missatge que rep és "", vol dir que 
-	no havia missatge pendent de rebre per part del servidor.
-	"""
+        no havia missatge pendent de rebre per part del servidor.
+        """
         self.s.send('\\M' + chr(3))
-        data = s.recv(1024)
-
-        if data == '':
+        try:
+            data = self.s.recv(1024)
+        except:
             print 'Cap missatge pendent'
-        else:
-            return data
+        return data
         
     def tanca(self): 
     	"""

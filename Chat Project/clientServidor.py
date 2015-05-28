@@ -23,7 +23,9 @@ class clientServidor:
       """
       self.nom = ''
       for paraula in identitat:
-        self.nom = self.nom + paraula
+        self.nom = self.nom + ' ' + paraula
+
+      print self.nom
  
     def afegeixMissatge(self, missatge):
       """

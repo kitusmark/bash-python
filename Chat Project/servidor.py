@@ -34,7 +34,7 @@ if __name__ == '__main__':
 			con.setblocking(0)
 			print 'New client Connected To the Server...'
 			clientConnectat = clientServidor(con, addr)
-			clientsActius.append(con)
+			clientsActius.append(clientConnectat)
 			print 'Connected with ' + addr[0] + ':' + str(addr[1])
 		except Exception as e:
 			pass
@@ -44,32 +44,33 @@ if __name__ == '__main__':
 			while not final:
 				c = ''
 				try:
-					c = client.recv(1)
+					c = client.con.recv(1)
 				except socket.error:
 					pass
 
 				if c == chr(3):
 					#Hem assolit el final del missatge
 					final = True
-					paraules = clientConnectat.peticio.split()
+					paraules = client.peticio.split()
 					print paraules
 					if paraules[0] == '\\I':
 						#Missatge amb la identitat
-						clientConnectat.fixaIdentitat(paraules[1:len(paraules)])
+						print 'fixant la identitat...'
+						client.fixaIdentitat(paraules[1:len(paraules)])
 					elif paraules[0] == '\\M':
 						#Consulta de missatges
-						if clientConnectat.HiHaMissatges():
-							client.send(clientConnectat.missatgePendent())
+						if client.HiHaMissatges():
+							client.con.send(client.missatgePendent())
 						else:
-							client.send('')
+							client.con.send('')
 					elif paraules[0] == '\\F':
 						#Tanquem la conexio amb el client i lesborrem de la llista
-						client.close()
-						if len(clientConnectat.cuaMissatges) > 0:
+						clientsActius.remove(clientsActius.index(client))
+						if len(clientsActius) == 0:
 							s.close()
 					else:
 						#Missatge que sha denviar a tots els clients
-						for client in clientsActius:
-							clientConnectat.afegeixMissatge(paraules[1:len(paraules)])
+						for i in clientsActius:
+							i.afegeixMissatge(paraules[1:len(paraules)])
 				else:
-					clientConnectat.construeixPeticio(c)
+					client.construeixPeticio(c)
