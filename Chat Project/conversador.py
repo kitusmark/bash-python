@@ -6,7 +6,7 @@ class conversador:
     def __init__(self):
         self.PORT = 50007
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+        self.data = ''
     def connectar(self, identitat, adreca):
         """ 
     	El constructor de la classe
@@ -47,10 +47,14 @@ class conversador:
         """
         self.s.send('\\M' + chr(3))
         try:
-            data = self.s.recv(1024)
+            self.data = self.s.recv(1024)
         except:
             print 'Cap missatge pendent'
-        return data
+
+        if self.data == '':
+            return ''
+        else:
+            return self.data
         
     def tanca(self): 
     	"""

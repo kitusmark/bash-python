@@ -10,6 +10,7 @@ adreca = 'localhost'
 identitat = ''
 
 def escoltar():
+	print 'escoltant...'
 	root.after(1000, escoltar)
 	missatge = client.escolta()
 
